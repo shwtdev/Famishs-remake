@@ -128,9 +128,9 @@ class Logger {
         if (typeof config.outputFile === "string") {
             this.stream = (0, fs_1.createWriteStream)(config.outputFile + "last.log");
             this.timeStream = (0, fs_1.createWriteStream)(config.outputFile + new Date().toISOString().replace(/:/g, "-") + ".log");
-            const files = fs_2.default.readdirSync(path.join(__dirname, "../../data/logs"));
+            const files = fs_2.default.readdirSync(path.join(__dirname, "../../data/logs/"));
             if (files.length > 25) {
-                fs_2.default.rmSync(path.join(__dirname, "../../data/logs") + files[1]);
+                fs_2.default.rmSync(path.join(__dirname, "../../data/logs/") + files[1]);
             }
         }
     }

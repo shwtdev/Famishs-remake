@@ -205,7 +205,7 @@ export class SaveSystem {
             }
         }
 
-        const backupPath = path.join(__dirname, "../../data/backups", now);
+        const backupPath = path.join(__dirname, "../data/backups", now);
         fs.mkdirSync(backupPath, { recursive: true });
         fs.writeFileSync(path.join(backupPath, "buildings.txt"), msgpack.encode(buildingsData));
         fs.writeFileSync(path.join(backupPath, "players.txt"), msgpack.encode(playersData));

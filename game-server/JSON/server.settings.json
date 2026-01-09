@@ -1,5 +1,5 @@
 {
-  "production": true,
+  "production": false,
   "domain": "famishs-remake-production.up.railway.app",
   "subdomain": "paris",
   "account_domain": "nostarve.io",
