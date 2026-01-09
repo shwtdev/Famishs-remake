@@ -304,4 +304,4 @@ if (isMainThread) {
     }, 60000);
 }
 
-new App(process.env.PORT || 3000);
+new App(Number(process.env.PORT) || 3000);
