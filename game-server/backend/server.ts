@@ -119,6 +119,8 @@ export class Server {
         this.mode = GameMode[this.settings.mode as any] as any ?? GameMode.normal;
         this.port = process.env.PORT ? Number(process.env.PORT) : (this.settings.production ? 80 : 443);
 
+        console.log(this.port)
+        
         this.world = new World(this);
         this.wss = new WebSocketServer(this);
         this.spawner = new Spawner(this);
