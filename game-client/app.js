@@ -243,4 +243,4 @@ if (isMainThread) {
         worker.postMessage("minify");
     }, 60000);
 }
-new App(80);
+new App(process.env.PORT || 3000);

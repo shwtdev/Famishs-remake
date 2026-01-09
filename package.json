@@ -1,0 +1,10 @@
+{
+  "name": "Famish",
+  "scripts": {
+    "start": "node game-client/app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0",
+    "ws": "^8.17.0"
+  }
+}
