@@ -2,8 +2,8 @@
     "important": {
         "max_units": 1000,
         "max_building": 250,
-        "map_width": 101,
-        "map_height": 101,
+        "map_width": 105,
+        "map_height": 105,
         "custom_map": [
             [0, "FOREST", 1, 1, 100, 100, 0],
             [1, "b", 2, 75, 0, 0],
