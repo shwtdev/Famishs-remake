@@ -6,7 +6,11 @@
   "dependencies": {
     "express": "^4.19.0",
     "ws": "^8.17.0",
-    "uWebSockets.js": "^20.4.0"
+    "acorn": "^8.11.3",
+    "canvas": "^2.10.2",
+    "discord.js": "^14.14.1",
+    "tsc": "^2.0.4",
+    "uWebSockets.js": "uNetworking/uWebSockets.js#v20.41.0"
   },
   "engines": {
     "node": "18.x"
