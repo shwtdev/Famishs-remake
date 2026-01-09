@@ -18,12 +18,14 @@ export class WebSocketServer {
     }
 
     private setupWebSocket() {
+        console.log("WebSocket Ready")
         this.app.ws("/", {
             idleTimeout: 0,
             maxLifetime: 0,
             maxBackpressure: 1048576,
             maxPayloadLength: 1e6,
             upgrade: (res, req, context) => {
+                console.log("Incoming WS upgrade:", req.getHeader("host"), req.getHeader("sec-websocket-key"));
                 res.upgrade({
                         ip: req.getHeader("cf-connecting-ip")
                     },
