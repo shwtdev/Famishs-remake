@@ -14,8 +14,12 @@ import { CLIENT } from "./variables/CLIENT.js";
 import { CONFIG } from "./config.js";
 import { LANG } from "./templates/LANG.js";
 import { DIE } from "./templates/DIE.js";
+import * as path from "path";
+import * as url from "url";
+
 let seed = Math.floor(Math.random() * 0x80000000);
 const letters = shuffleArray(CONFIG.letters, seed).join("");
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const fullLetters = shuffleArray((CONFIG.letters.join("") + CONFIG.extraLetters.join("")).split(""), seed).join("");
 function seededRandom(seed) {
     let state = seed;
@@ -246,12 +250,13 @@ async function obfuscate(code) {
     });
 }
 if (parentPort) {
-    const og = fs.readFileSync("./data/client.js", "utf-8");
+    const og = fs.readFileSync(path.join(__dirname, "../data/client.js"), "utf-8");
+
     parentPort.on('message', async (message) => {
         if (message === "minify") {
             const code = await obfuscate(og);
             if (typeof code === "string") {
-                fs.writeFileSync("./data/c.js", code);
+                fs.writeFileSync(path.join(__dirname, "../data/c.js"), code);
                 if (parentPort) {
                     parentPort.postMessage("minified");
                 }

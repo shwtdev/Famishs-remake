@@ -10,7 +10,9 @@ import { Utils } from "./modules/Utils.js";
 import { IP } from "./modules/IP.js";
 import * as path from "path";
 import * as url from "url";
-// 2023 code, i lazy to change it
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
 export class App {
     port;
     app;
@@ -24,11 +26,17 @@ export class App {
         this.app.use(express.json());
         this.server = http.createServer(this.app);
         this.ips = new Map();
-        this.serverData = JSON.parse(fs.readFileSync('./frontend/servers.json', { encoding: "utf-8" }));
-        this.accounts = JSON.parse(fs.readFileSync("./JSON/accounts.json", { encoding: "utf-8" }));
+        this.serverData = JSON.parse(
+            fs.readFileSync(path.join(__dirname, "frontend/servers.json"), "utf-8")
+        );
+        this.accounts = JSON.parse(
+            fs.readFileSync(path.join(__dirname, "JSON/accounts.json"), "utf-8")
+        );
         this.run();
         this.setupRoutes();
         this.setupPrivateRoutes();
+
+        console.log("[App.js] Client is ready for delivery")
     }
     setupPrivateRoutes() {
         this.app.put("/updatePlayerCount", this.updatePlayerCount.bind(this));
@@ -36,10 +44,10 @@ export class App {
     }
     setupRoutes() {
         this.app.set("trust proxy", true);
-        this.app.get("/buySpin", this.onBuySpin.bind(this));
+        //this.app.get("/buySpin", this.onBuySpin.bind(this));
         // this.app.get("/buyKit", this.onBuyKit.bind(this));
-        this.app.post("/login", this.onLogin.bind(this));
-        this.app.post("/register", this.onRegister.bind(this));
+        //this.app.post("/login", this.onLogin.bind(this));
+        //this.app.post("/register", this.onRegister.bind(this));
         this.app.get("/servers", (req, res) => {
             const address = req.ip;
             if (!this.ips.has(address)) {
@@ -220,16 +228,19 @@ export class App {
         res.end();
     }
     run() {
-        this.app.get("/js/client.min.js", (req, res) => {
-            res.sendFile(path.dirname(url.fileURLToPath(import.meta.url)) + "/data/client.js");
+        this.app.get("/", (req, res) => {
+            res.sendFile(path.join(__dirname, "frontend/index.html"));
         });
-        this.app.use(express.static("frontend"));
-        this.server.listen(this.port);
+        this.app.use(express.static(path.join(__dirname, "frontend")));
+        this.server.listen(this.port, () => {
+            console.log(`[App.js] Server running on port ${this.port}`);
+            console.log("[App.js] Serving frontend from:", path.join(__dirname, "frontend"));
+        });
     }
 }
 import { Worker, isMainThread } from 'worker_threads';
 if (isMainThread) {
-    const worker = new Worker('./obfuscator/obfuscator.js');
+    const worker = new Worker(path.join(__dirname, "obfuscator/obfuscator.js"));
     worker.on('error', (error) => {
         console.error('Error in Worker:', error);
     });
