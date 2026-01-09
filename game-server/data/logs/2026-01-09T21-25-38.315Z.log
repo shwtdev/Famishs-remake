@@ -1,0 +1,15 @@
+[10:25:38 PM] [LOG] [Network] WebSocket server is listening on port 80
+[10:25:38 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\content
+[10:25:38 PM] [ERROR] [CommandSystem] Invalid command from path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\command\commands\building\clean-building.js
+[10:25:39 PM] [WARN] [TICKER] TPS: 18.867924528301888 | DELTA: 0.053
+[10:25:39 PM] [WARN] [TICKER] TPS: 15.625 | DELTA: 0.064
+[10:25:39 PM] [WARN] [TICKER] TPS: 19.607843137254903 | DELTA: 0.051
+[10:25:43 PM] [LOG] [SaveSystem] Loaded 0 players & 0 buildings & 0 crates
+[10:25:54 PM] [WARN] [TICKER] TPS: 19.23076923076923 | DELTA: 0.052
+[10:26:10 PM] [WARN] [TICKER] TPS: 16.949152542372882 | DELTA: 0.059
+[10:26:10 PM] [WARN] [TICKER] TPS: 13.157894736842106 | DELTA: 0.076
+[10:26:10 PM] [WARN] [TICKER] TPS: 14.925373134328357 | DELTA: 0.067
+[10:26:12 PM] [WARN] [TICKER] TPS: 17.857142857142858 | DELTA: 0.056
+[10:26:14 PM] [WARN] [TICKER] TPS: 19.607843137254903 | DELTA: 0.051
+[10:26:23 PM] [WARN] [TICKER] TPS: 16.129032258064516 | DELTA: 0.062
+[10:26:23 PM] [WARN] [TICKER] TPS: 19.607843137254903 | DELTA: 0.051
