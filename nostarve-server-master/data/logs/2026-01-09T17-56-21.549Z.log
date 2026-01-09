@@ -1,0 +1,24 @@
+[6:56:21 PM] [LOG] [Network] WebSocket server is listening on port 443
+[6:56:21 PM] [LOG] [Content] Loading base content-pack
+[6:56:21 PM] [LOG] [Content] Loaded 10 entities
+[6:56:21 PM] [ERROR] [CommandSystem] Invalid command from path: E:\Scripts\nostarve\nostarve-server-master\compiled\command\commands\building\clean-building.js
+[6:56:21 PM] [WARN] [TICKER] TPS: 6.666666666666667 | DELTA: 0.15
+[6:56:26 PM] [LOG] [SaveSystem] Loaded 1 players & 0 buildings & 5 crates
+[6:56:28 PM] [LOG] [Network] Connected with 0.0.0.1 ip
+[6:56:34 PM] [WARN] [TICKER] TPS: 18.51851851851852 | DELTA: 0.054
+[6:57:08 PM] [LOG] Player restarver#7|7 died by restarver#1|1 with reason 3
+[6:58:00 PM] [LOG] [Network] Disconnected with 0.0.0.1 ip 1001 [object ArrayBuffer]
+[6:58:06 PM] [LOG] [Network] Connected with 0.0.0.1 ip
+[6:58:08 PM] [LOG] [Network] Disconnected with 0.0.0.1 ip 1006 [object ArrayBuffer]
+[6:58:13 PM] [LOG] [Network] Connected with 0.0.0.1 ip
+[6:58:23 PM] [LOG] [Network] Disconnected with 0.0.0.1 ip 1001 [object ArrayBuffer]
+[6:58:27 PM] [LOG] [Network] Connected with 0.0.0.1 ip
+[6:58:32 PM] [LOG] Player restarver#2|2 died by restarver#4|4 with reason 3
+[6:58:37 PM] [LOG] Player restarver#1|1 died by restarver#4|4 with reason 3
+[6:58:39 PM] [LOG] Player restarver#3|3 died by restarver#4|4 with reason 3
+[6:59:05 PM] [WARN] [TICKER] TPS: 19.607843137254903 | DELTA: 0.051
+[6:59:09 PM] [WARN] [TICKER] TPS: 13.88888888888889 | DELTA: 0.072
+[6:59:15 PM] [WARN] [TICKER] TPS: 18.867924528301888 | DELTA: 0.053
+[6:59:16 PM] [WARN] [TICKER] TPS: 18.181818181818183 | DELTA: 0.055
+[7:00:11 PM] [WARN] [TICKER] TPS: 16.949152542372882 | DELTA: 0.059
+[7:00:14 PM] [LOG] [Network] Disconnected with 0.0.0.1 ip 1001 [object ArrayBuffer]
