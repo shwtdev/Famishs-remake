@@ -10,7 +10,9 @@
     "canvas": "^2.10.2",
     "discord.js": "^14.14.1",
     "tsc": "^2.0.4",
-    "uWebSockets.js": "uNetworking/uWebSockets.js#v20.41.0"
+    "uWebSockets.js": "uNetworking/uWebSockets.js#v20.41.0",
+    "js-confuser": "^1.7.1",
+    "terser": "^5.29.2"
   },
   "engines": {
     "node": "18.x"
