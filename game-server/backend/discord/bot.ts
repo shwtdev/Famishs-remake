@@ -7,8 +7,9 @@ import {EntityType} from "../enums/types/entity.type";
 import SpriteManager from "../sprite/sprite.manager";
 import LeaderboardUtils from "../leaderboard/leaderboard.utils";
 import {ItemType} from "../enums/types/item.type";
+import * as path from "path";
 
-registerFont("./BalooPaaji2-ExtraBold.ttf", {
+registerFont(path.join(__dirname,"../../BalooPaaji2-ExtraBold.ttf"), {
     family: "Baloo Paaji 2"
 });
 

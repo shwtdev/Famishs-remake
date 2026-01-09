@@ -1,11 +1,11 @@
 [
     {
-        "i": "26.95.3.3",
-        "a": "26.95.3.3",
+        "i": "Famishs",
+        "a": "famishs-remake-production.up.railway.app",
         "nu": 0,
         "m": 101,
         "p": 443,
-        "ssl": false
+        "ssl": true
     },
     {
         "i": "localhost",

@@ -48,60 +48,58 @@ class ContentManager {
         this.loadPackages();
     }
     softReadDir(dir) {
-        const parts = dir.split("/");
-        let path = "";
-        for (let i = 0; i < parts.length; i++) {
-            const newPart = parts.shift();
-            if (!fs.existsSync(path + newPart + "/")) {
-                this.server.logger.error(`[Content] ${logger_1.CONSOLE_FORMATTERS.RED}${logger_1.CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${path}${logger_1.CONSOLE_FORMATTERS.UNDERLINE}${newPart}`);
-                return [];
-            }
-            path += newPart + "/";
+        const fullDir = path_1.default.join(__dirname, dir); // Use __dirname here
+        if (!fs.existsSync(fullDir)) {
+            this.server.logger.error(`[Content] ${logger_1.CONSOLE_FORMATTERS.RED}${logger_1.CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${fullDir}`);
+            return [];
         }
-        return fs.readdirSync(dir);
+        return fs.readdirSync(fullDir);
     }
-    softReadFile(path, fileEncoding = "utf8") {
-        if (!fs.existsSync(path)) {
-            this.server.logger.error(`[Content] ${logger_1.CONSOLE_FORMATTERS.RED}${logger_1.CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${path}`);
+    softReadFile(filePath, fileEncoding = "utf8") {
+        const fullPath = path_1.default.join(__dirname, filePath); // Use __dirname here
+        if (!fs.existsSync(fullPath)) {
+            this.server.logger.error(`[Content] ${logger_1.CONSOLE_FORMATTERS.RED}${logger_1.CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${fullPath}`);
             return null;
         }
-        return fs.readFileSync(path, { encoding: fileEncoding });
+        return fs.readFileSync(fullPath, { encoding: fileEncoding });
     }
     readEntities(contentName, entitiesPath, paths) {
         for (const unParsedPath of paths) {
             const parsedPath = path_1.default.parse(unParsedPath);
             const name = parsedPath.name;
             if (parsedPath.ext === ".json") {
-                const config = this.softReadFile(entitiesPath + unParsedPath, "utf8");
+                const config = this.softReadFile(path_1.default.join(entitiesPath, unParsedPath), "utf8");
+                if (!config)
+                    continue;
                 try {
                     const buildingDef = JSON.parse(config);
                     const id = entity_type_1.EntityType[name.toUpperCase()];
                     if (typeof id !== "number") {
-                        this.server.logger.warn(`[Content] ${logger_1.CONSOLE_FORMATTERS.RESET}${logger_1.CONSOLE_FORMATTERS.BG_YELLOW}Skipped building ${name} invalid building because config not valid`);
-                        return;
+                        this.server.logger.warn(`[Content] ${logger_1.CONSOLE_FORMATTERS.RESET}${logger_1.CONSOLE_FORMATTERS.BG_YELLOW}Skipped building ${name}: invalid entity type`);
+                        continue;
                     }
                     this.server.content.entities[id] = buildingDef;
                 }
                 catch (e) {
-                    this.server.logger.warn(`[Content] ${logger_1.CONSOLE_FORMATTERS.RESET}${logger_1.CONSOLE_FORMATTERS.BG_YELLOW}Skipped building ${name} invalid building because config not valid`);
+                    this.server.logger.warn(`[Content] ${logger_1.CONSOLE_FORMATTERS.RESET}${logger_1.CONSOLE_FORMATTERS.BG_YELLOW}Skipped building ${name}: invalid JSON`);
                 }
             }
             else if (parsedPath.ext === "") {
-                const newPath = entitiesPath + name + "/";
+                const newPath = path_1.default.join(entitiesPath, name); // path to subfolder
                 const newPaths = this.softReadDir(newPath);
                 this.readEntities(contentName, newPath, newPaths);
             }
         }
     }
     loadPackages() {
-        const fileNames = this.softReadDir("./content");
+        const fileNames = this.softReadDir("../../../content"); // adjust relative to this file
         for (const fileName of fileNames) {
             this.server.logger.log(`[Content] ${logger_1.CONSOLE_FORMATTERS.MAGENTA}Loading ${fileName} content-pack`);
-            const entitiesFolder = this.softReadDir(`./content/${fileName}/entities`);
+            const entitiesFolder = this.softReadDir(path_1.default.join("../../../content", fileName, "entities"));
             if (entitiesFolder.length !== 0) {
                 this.server.logger.log(`[Content]${logger_1.CONSOLE_FORMATTERS.GREEN} Loaded ${entitiesFolder.length} entities`);
             }
-            this.readEntities(fileName, `./content/${fileName}/entities/`, entitiesFolder);
+            this.readEntities(fileName, path_1.default.join("../../../content", fileName, "entities"), entitiesFolder);
         }
     }
 }

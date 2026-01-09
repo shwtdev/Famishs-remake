@@ -38,6 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SaveSystem = void 0;
 const fs = __importStar(require("fs"));
+const path_1 = __importDefault(require("path"));
 const building_1 = __importDefault(require("../building/building"));
 const crate_1 = require("../entities/crate");
 const entity_type_1 = require("../enums/types/entity.type");
@@ -52,15 +53,17 @@ class SaveSystem {
         this.server = server;
     }
     findLastSaved(id) {
-        const files = fs.readdirSync("./data/backups");
+        const backupDir = path_1.default.join(__dirname, "../../data/backups"); // use __dirname
+        const files = fs.readdirSync(backupDir);
         if (!files.length)
             return null;
         const lastFile = files[id ? id : files.length - 1];
         if (!lastFile)
             return null;
-        const players = msgpack_lite_1.default.decode(fs.readFileSync("./data/backups/" + lastFile + "/players.txt"));
-        const buildings = msgpack_lite_1.default.decode(fs.readFileSync("./data/backups/" + lastFile + "/buildings.txt"));
-        const crates = msgpack_lite_1.default.decode(fs.readFileSync("./data/backups/" + lastFile + "/crates.txt"));
+        const lastFileDir = path_1.default.join(backupDir, lastFile);
+        const players = msgpack_lite_1.default.decode(fs.readFileSync(path_1.default.join(lastFileDir, "players.txt")));
+        const buildings = msgpack_lite_1.default.decode(fs.readFileSync(path_1.default.join(lastFileDir, "buildings.txt")));
+        const crates = msgpack_lite_1.default.decode(fs.readFileSync(path_1.default.join(lastFileDir, "crates.txt")));
         return [players, buildings, crates];
     }
     async load(id) {
@@ -75,8 +78,8 @@ class SaveSystem {
             const [id, state, items, inventorySize, x, y, angle, info, action, speed, extra, health, bandage, reason, score, time, nickname, token, token_id, level, helmetId, rightId, vehicleId, createdAt, lastEvent, name, password, skin, accessory, book, bag, crate, dead] = p;
             const player = this.server.players[id - 1];
             player.inventory.maxSize = inventorySize;
-            for (const [id, count] of items) {
-                player.inventory.increase(id, count);
+            for (const [itemId, count] of items) {
+                player.inventory.increase(itemId, count);
             }
             player.alive = true;
             player.id = id;
@@ -117,9 +120,8 @@ class SaveSystem {
         for (const b of buildings) {
             const [type, id, pid, x, y, angle, info, action, speed, extra, health, createdAt, data, timestamps] = b;
             const player = this.server.players[pid - 1];
-            if (!player?.alive) {
+            if (!player?.alive)
                 continue;
-            }
             const building = new building_1.default(type, player, this.server);
             this.server.entities[id] = building;
             this.server.entityPool.used[id] = true;
@@ -141,9 +143,8 @@ class SaveSystem {
             if (building.type === entity_type_1.EntityType.TOTEM && building.data.length) {
                 for (const data of building.data) {
                     const player = this.server.players[data - 1];
-                    if (player?.alive) {
+                    if (player?.alive)
                         player.totem = building;
-                    }
                 }
             }
             if (building.getComponent("DOOR" /* ComponentType.DOOR */) && building.info % 2 !== 0) {
@@ -156,14 +157,11 @@ class SaveSystem {
         }
         for (const c of crates) {
             const [id, x, y, angle, info, action, speed, extra, items, health, radius, createdAt, boxType] = c;
-            const crate = new crate_1.Crate(this.server, {
-                type: boxType,
-                restore: true
-            });
-            for (const [id, count] of items) {
+            const crate = new crate_1.Crate(this.server, { type: boxType, restore: true });
+            for (const [itemId, count] of items) {
                 if (crate.boxType === "gift")
                     continue;
-                crate.inventory.increase(id, count);
+                crate.inventory.increase(itemId, count);
             }
             crate.id = id;
             this.server.entityPool.used[id] = true;
@@ -202,10 +200,11 @@ class SaveSystem {
                 cratesData.push(entity.serialize());
             }
         }
-        fs.mkdirSync("./data/backups/" + now, { recursive: true });
-        fs.writeFileSync("./data/backups/" + now + "/buildings.txt", msgpack_lite_1.default.encode(buildingsData));
-        fs.writeFileSync("./data/backups/" + now + "/players.txt", msgpack_lite_1.default.encode(playersData));
-        fs.writeFileSync("./data/backups/" + now + "/crates.txt", msgpack_lite_1.default.encode(cratesData));
+        const backupPath = path_1.default.join(__dirname, "../../data/backups", now);
+        fs.mkdirSync(backupPath, { recursive: true });
+        fs.writeFileSync(path_1.default.join(backupPath, "buildings.txt"), msgpack_lite_1.default.encode(buildingsData));
+        fs.writeFileSync(path_1.default.join(backupPath, "players.txt"), msgpack_lite_1.default.encode(playersData));
+        fs.writeFileSync(path_1.default.join(backupPath, "crates.txt"), msgpack_lite_1.default.encode(cratesData));
     }
 }
 exports.SaveSystem = SaveSystem;

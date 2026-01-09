@@ -1,7 +1,7 @@
 {
-  "production": false,
+  "production": true,
+  "domain": "famishs-remake-production.up.railway.app",
   "subdomain": "paris",
-  "domain": "nostarve.io",
   "account_domain": "nostarve.io",
   "owner_login": "Askile",
   "admins": ["Askile", "LapaMauve"],

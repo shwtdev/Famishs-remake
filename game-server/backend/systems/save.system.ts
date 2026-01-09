@@ -1,46 +1,51 @@
 import * as fs from "fs";
-import {Server} from "../server";
+import path from "path";
+import { Server } from "../server";
 import Building from "../building/building";
-import {Crate} from "../entities/crate";
-import {EntityType} from "../enums/types/entity.type";
+import { Crate } from "../entities/crate";
+import { EntityType } from "../enums/types/entity.type";
 import Player from "../entities/player";
 import Master from "../master/master";
 import msgpack from "msgpack-lite";
-import {Vector} from "../modules/vector";
+import { Vector } from "../modules/vector";
 import Timestamp from "../modules/timestamp";
-import {ComponentType} from "../enums/types/component.type";
-import {Permissions} from "../enums/permissions";
+import { ComponentType } from "../enums/types/component.type";
+import { Permissions } from "../enums/permissions";
 
 export class SaveSystem {
     public server: Server;
+
     constructor(server: Server) {
         this.server = server;
     }
 
     private findLastSaved(id?: number) {
-        const files = fs.readdirSync("./data/backups");
+        const backupDir = path.join(__dirname, "../../data/backups"); // use __dirname
+        const files = fs.readdirSync(backupDir);
 
-        if(!files.length) return null;
+        if (!files.length) return null;
 
         const lastFile = files[id ? id : files.length - 1];
+        if (!lastFile) return null;
 
-        if(!lastFile) return null;
-
-        const players = msgpack.decode(fs.readFileSync("./data/backups/" + lastFile + "/players.txt"));
-        const buildings = msgpack.decode(fs.readFileSync("./data/backups/" + lastFile + "/buildings.txt"));
-        const crates = msgpack.decode(fs.readFileSync("./data/backups/" + lastFile + "/crates.txt"));
+        const lastFileDir = path.join(backupDir, lastFile);
+        const players = msgpack.decode(fs.readFileSync(path.join(lastFileDir, "players.txt")));
+        const buildings = msgpack.decode(fs.readFileSync(path.join(lastFileDir, "buildings.txt")));
+        const crates = msgpack.decode(fs.readFileSync(path.join(lastFileDir, "crates.txt")));
 
         return [players, buildings, crates];
     }
 
     public async load(id?: number) {
         const data = this.findLastSaved(id);
-        if(!data) {
+        if (!data) {
             this.server.loaded = true;
             return;
         }
+
         const now = Date.now();
         const [players, buildings, crates] = data;
+
         for (const p of players) {
             const [
                 id, state, items, inventorySize, x, y, angle, info, action, speed,
@@ -51,11 +56,10 @@ export class SaveSystem {
             ] = p;
 
             const player = this.server.players[id - 1];
-
             player.inventory.maxSize = inventorySize;
 
-            for (const [id, count] of items) {
-                player.inventory.increase(id, count);
+            for (const [itemId, count] of items) {
+                player.inventory.increase(itemId, count);
             }
 
             player.alive = true;
@@ -102,10 +106,9 @@ export class SaveSystem {
                 extra, health, createdAt,
                 data, timestamps
             ] = b;
+
             const player = this.server.players[pid - 1];
-            if(!player?.alive) {
-                continue;
-            }
+            if (!player?.alive) continue;
 
             const building = new Building(type, player, this.server);
 
@@ -129,12 +132,10 @@ export class SaveSystem {
                 building.timestamps.set(timestamp[0], new Timestamp(timestamp[1]));
             }
 
-            if(building.type === EntityType.TOTEM && building.data.length) {
+            if (building.type === EntityType.TOTEM && building.data.length) {
                 for (const data of building.data) {
                     const player = this.server.players[data - 1];
-                    if(player?.alive) {
-                        player.totem = building;
-                    }
+                    if (player?.alive) player.totem = building;
                 }
             }
 
@@ -142,7 +143,7 @@ export class SaveSystem {
                 building.setComponent(ComponentType.OBSTACLE, false);
             }
 
-            if(player) {
+            if (player) {
                 building.owner = player;
                 player.addBuilding(building);
             }
@@ -155,14 +156,11 @@ export class SaveSystem {
                 createdAt, boxType
             ] = c;
 
-            const crate = new Crate(this.server, {
-                type: boxType,
-                restore: true
-            });
+            const crate = new Crate(this.server, { type: boxType, restore: true });
 
-            for (const [id, count] of items) {
-                if(crate.boxType === "gift") continue;
-                crate.inventory.increase(id, count);
+            for (const [itemId, count] of items) {
+                if (crate.boxType === "gift") continue;
+                crate.inventory.increase(itemId, count);
             }
 
             crate.id = id;
@@ -184,7 +182,6 @@ export class SaveSystem {
         setTimeout(() => {
             console.log(`[SaveSystem] Loaded ${players.length} players & ${buildings.length} buildings & ${crates.length} crates`);
             this.server.loaded = true;
-
             this.server.logger.log(`[SaveSystem] Loaded ${players.length} players & ${buildings.length} buildings & ${crates.length} crates`);
         }, 5000);
     }
@@ -197,19 +194,21 @@ export class SaveSystem {
         const now = new Date().toISOString().replace(/:/g, '-');
 
         this.server.logger.log(`[SaveSystem] Saving ${this.server.entities.length} entities`);
+
         for (const entity of Object.values(this.server.entities)) {
-            if(entity instanceof Player && entity.alive) {
+            if (entity instanceof Player && entity.alive) {
                 playersData.push((entity.serialize as any)());
-            } else if(entity instanceof Building) {
+            } else if (entity instanceof Building) {
                 buildingsData.push((entity.serialize as any)());
-            } else if(entity instanceof Crate) {
+            } else if (entity instanceof Crate) {
                 cratesData.push((entity.serialize as any)());
             }
         }
 
-        fs.mkdirSync("./data/backups/" + now, {recursive: true});
-        fs.writeFileSync("./data/backups/" + now + "/buildings.txt", msgpack.encode(buildingsData));
-        fs.writeFileSync("./data/backups/" + now + "/players.txt", msgpack.encode(playersData));
-        fs.writeFileSync("./data/backups/" + now + "/crates.txt", msgpack.encode(cratesData));
+        const backupPath = path.join(__dirname, "../../data/backups", now);
+        fs.mkdirSync(backupPath, { recursive: true });
+        fs.writeFileSync(path.join(backupPath, "buildings.txt"), msgpack.encode(buildingsData));
+        fs.writeFileSync(path.join(backupPath, "players.txt"), msgpack.encode(playersData));
+        fs.writeFileSync(path.join(backupPath, "crates.txt"), msgpack.encode(cratesData));
     }
 }

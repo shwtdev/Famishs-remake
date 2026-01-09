@@ -1,7 +1,7 @@
 {
   "name": "Famish",
   "scripts": {
-    "start": "node game-client/app.js"
+    "start": "node launch.js"
   },
   "dependencies": {
     "express": "^4.19.0",

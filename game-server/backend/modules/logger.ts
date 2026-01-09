@@ -1,5 +1,6 @@
 import {createWriteStream, readFileSync, WriteStream} from "fs";
 import fs from "fs";
+import * as path from "path";
 
 /**
  * Console formatters.
@@ -100,9 +101,9 @@ export default class Logger {
             this.stream = createWriteStream(config.outputFile + "last.log");
             this.timeStream = createWriteStream(config.outputFile + new Date().toISOString().replace(/:/g, "-") + ".log");
 
-            const files = fs.readdirSync("./data/logs");
+            const files = fs.readdirSync(path.join(__dirname, "../../data/logs"));
             if(files.length > 25) {
-                fs.rmSync("./data/logs/" + files[1]);
+                fs.rmSync(path.join(__dirname, "../../data/logs") + files[1]);
             }
 
         }

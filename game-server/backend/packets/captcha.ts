@@ -1,5 +1,6 @@
 import { Canvas, CanvasRenderingContext2D, createCanvas, registerFont } from "canvas";
 import {Utils} from "../modules/utils";
+import * as path from "path";
 
 const CAPTCHA_AMOUNT = 20;
 const CAPTCHA_SIZE = 140;
@@ -9,9 +10,10 @@ const FONT_SIZE = 22;
 const characters = ["0", "2", "5", "6", "8"];
 let charactersImages: any = [];
 
-registerFont("./Sevillana-Regular.ttf", {
-    family: "Sevillana"
-});
+registerFont(
+    path.join(__dirname, "../../Sevillana-Regular.ttf"),
+    { family: "Sevillana" }
+);
 
 export const captcha: any = [];
 let i = 0;

@@ -36,6 +36,8 @@ import DiscordBot from "./discord/bot";
 import CraftSystem from "./craft/craft.system";
 import CommandSystem from "./command/command.system";
 import TeamSystem from "./team/team.system";
+import * as path from "path";
+
 
 Math.clamp = (variable: number, min: number, max: number) => {
     return Math.max(min, Math.min(variable, max));
@@ -47,10 +49,10 @@ Math.randomClamp = (min: number, max: number) => {
 
 Math.PI2 = Math.PI * 2;
 
-const config = JSON.parse(fs.readFileSync("./JSON/config.json", "utf-8"));
-export const discordConfig = JSON.parse(fs.readFileSync("./JSON/discord.json", "utf-8"));
-const serverConfig = JSON.parse(fs.readFileSync("./JSON/server.settings.json", "utf-8"));
-export const objects = JSON.parse(fs.readFileSync("./JSON/resources.json", "utf-8")).objects;
+const config = JSON.parse(fs.readFileSync(path.join(__dirname, "../JSON/config.json"), "utf-8"));
+export const discordConfig = JSON.parse(fs.readFileSync(path.join(__dirname,"../JSON/discord.json"), "utf-8"));
+const serverConfig = JSON.parse(fs.readFileSync(path.join(__dirname,"../JSON/server.settings.json"), "utf-8"));
+export const objects = JSON.parse(fs.readFileSync(path.join(__dirname,"../JSON/resources.json"), "utf-8")).objects;
 export class Server {
     public players: Player[];
     public alivePlayers: Player[];
@@ -91,9 +93,9 @@ export class Server {
     public buildingSystem: BuildingSystem;
     public interactionSystem: InteractionSystem;
     public logger: Logger = new Logger({
-        title: "Arena of bottle",
+        title: "Famishs",
         delay: 50,
-        outputFile: "./data/logs/"
+        outputFile: path.join(__dirname, "../data/logs/")
     });
 
     public ticker: Ticker;
@@ -115,7 +117,7 @@ export class Server {
         this.welcome = "";
         this.url = `http${this.settings.production ? "s" : ""}://${this.settings.production ? this.settings.domain : "localhost"}/`;
         this.mode = GameMode[this.settings.mode as any] as any ?? GameMode.normal;
-        this.port = this.settings.production ? 80 : 443;
+        this.port = process.env.PORT ? Number(process.env.PORT) : (this.settings.production ? 80 : 443);
 
         this.world = new World(this);
         this.wss = new WebSocketServer(this);

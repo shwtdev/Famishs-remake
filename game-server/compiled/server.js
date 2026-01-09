@@ -1,4 +1,37 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -40,6 +73,7 @@ const bot_1 = __importDefault(require("./discord/bot"));
 const craft_system_1 = __importDefault(require("./craft/craft.system"));
 const command_system_1 = __importDefault(require("./command/command.system"));
 const team_system_1 = __importDefault(require("./team/team.system"));
+const path = __importStar(require("path"));
 Math.clamp = (variable, min, max) => {
     return Math.max(min, Math.min(variable, max));
 };
@@ -47,10 +81,10 @@ Math.randomClamp = (min, max) => {
     return Math.floor(min + Math.random() * (max + 1 - min));
 };
 Math.PI2 = Math.PI * 2;
-const config = JSON.parse(fs_1.default.readFileSync("./JSON/config.json", "utf-8"));
-exports.discordConfig = JSON.parse(fs_1.default.readFileSync("./JSON/discord.json", "utf-8"));
-const serverConfig = JSON.parse(fs_1.default.readFileSync("./JSON/server.settings.json", "utf-8"));
-exports.objects = JSON.parse(fs_1.default.readFileSync("./JSON/resources.json", "utf-8")).objects;
+const config = JSON.parse(fs_1.default.readFileSync(path.join(__dirname, "../JSON/config.json"), "utf-8"));
+exports.discordConfig = JSON.parse(fs_1.default.readFileSync(path.join(__dirname, "../JSON/discord.json"), "utf-8"));
+const serverConfig = JSON.parse(fs_1.default.readFileSync(path.join(__dirname, "../JSON/server.settings.json"), "utf-8"));
+exports.objects = JSON.parse(fs_1.default.readFileSync(path.join(__dirname, "../JSON/resources.json"), "utf-8")).objects;
 class Server {
     players;
     alivePlayers;
@@ -88,9 +122,9 @@ class Server {
     buildingSystem;
     interactionSystem;
     logger = new logger_1.default({
-        title: "Arena of bottle",
+        title: "Famishs",
         delay: 50,
-        outputFile: "./data/logs/"
+        outputFile: path.join(__dirname, "../data/logs/")
     });
     ticker;
     constructor() {
@@ -107,7 +141,7 @@ class Server {
         this.welcome = "";
         this.url = `http${this.settings.production ? "s" : ""}://${this.settings.production ? this.settings.domain : "localhost"}/`;
         this.mode = game_mode_1.GameMode[this.settings.mode] ?? game_mode_1.GameMode.normal;
-        this.port = this.settings.production ? 80 : 443;
+        this.port = process.env.PORT ? Number(process.env.PORT) : (this.settings.production ? 80 : 443);
         this.world = new world_1.World(this);
         this.wss = new websocket_server_1.WebSocketServer(this);
         this.spawner = new spawner_1.Spawner(this);

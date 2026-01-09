@@ -35,7 +35,7 @@ export class WebSocketServer {
             open: this.handleWebSocketOpen.bind(this),
             message: this.handleWebSocketMessage.bind(this),
             close: this.handleWebSocketClose.bind(this)
-        }).listen(this.server.port, () => {
+        }).listen(this.server.port, "0.0.0.0", () => {
             this.server.logger.log(`[Network] ${CONSOLE_FORMATTERS.GREEN}WebSocket server is listening on port ${CONSOLE_FORMATTERS.BLUE}${this.server.port}`);
         });
     }
