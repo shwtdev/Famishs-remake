@@ -2,7 +2,7 @@
   "production": true,
   "domain": "famishs-remake.onrender.com",
   "subdomain": "paris",
-  "account_domain": "nostarve.io",
+  "account_domain": "famishs-remake.onrender.com",
   "owner_login": "Askile",
   "admins": ["Askile", "LapaMauve"],
   "mode": "community",
