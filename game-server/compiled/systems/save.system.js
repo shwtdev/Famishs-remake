@@ -53,7 +53,9 @@ class SaveSystem {
         this.server = server;
     }
     findLastSaved(id) {
-        const backupDir = path_1.default.join(__dirname, "../../data/backups"); // use __dirname
+        const backupDir = path_1.default.join(__dirname, "../../data/backups");
+        if (!fs.existsSync(backupDir))
+            fs.mkdirSync(backupDir, { recursive: true });
         const files = fs.readdirSync(backupDir);
         if (!files.length)
             return null;

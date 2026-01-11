@@ -196,7 +196,7 @@ export class Client {
             PACKET_TYPE === ServerPackets.TAKE_ITEM || PACKET_TYPE === ServerPackets.TAKE_FLOUR ||
             PACKET_TYPE === ServerPackets.TAKE_EXTRACTOR || PACKET_TYPE === ServerPackets.TAKE_BREAD_OVEN
         )) return;
-
+        
         switch (PACKET_TYPE) {
             case ServerPackets.CHAT:
                 if(this.server.config.disable_chat === 1 || PACKET.length > 65) break;

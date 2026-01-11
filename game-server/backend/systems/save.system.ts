@@ -20,7 +20,10 @@ export class SaveSystem {
     }
 
     private findLastSaved(id?: number) {
-        const backupDir = path.join(__dirname, "../../data/backups"); // use __dirname
+        const backupDir = path.join(__dirname, "../../data/backups");
+
+        if (!fs.existsSync(backupDir)) fs.mkdirSync(backupDir, { recursive: true });
+        
         const files = fs.readdirSync(backupDir);
 
         if (!files.length) return null;

@@ -142,6 +142,7 @@ class Server {
         this.url = `http${this.settings.production ? "s" : ""}://${this.settings.production ? this.settings.domain : "localhost"}/`;
         this.mode = game_mode_1.GameMode[this.settings.mode] ?? game_mode_1.GameMode.normal;
         this.port = process.env.PORT ? Number(process.env.PORT) : (this.settings.production ? 80 : 443);
+        console.log(this.port);
         this.world = new world_1.World(this);
         this.wss = new websocket_server_1.WebSocketServer(this);
         this.spawner = new spawner_1.Spawner(this);

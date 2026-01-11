@@ -48,7 +48,7 @@ class ContentManager {
         this.loadPackages();
     }
     softReadDir(dir) {
-        const fullDir = path_1.default.join(__dirname, dir); // Use __dirname here
+        const fullDir = path_1.default.join(__dirname, dir);
         if (!fs.existsSync(fullDir)) {
             this.server.logger.error(`[Content] ${logger_1.CONSOLE_FORMATTERS.RED}${logger_1.CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${fullDir}`);
             return [];
@@ -56,7 +56,7 @@ class ContentManager {
         return fs.readdirSync(fullDir);
     }
     softReadFile(filePath, fileEncoding = "utf8") {
-        const fullPath = path_1.default.join(__dirname, filePath); // Use __dirname here
+        const fullPath = path_1.default.join(__dirname, filePath);
         if (!fs.existsSync(fullPath)) {
             this.server.logger.error(`[Content] ${logger_1.CONSOLE_FORMATTERS.RED}${logger_1.CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${fullPath}`);
             return null;
@@ -92,14 +92,14 @@ class ContentManager {
         }
     }
     loadPackages() {
-        const fileNames = this.softReadDir("../../../content"); // adjust relative to this file
+        const fileNames = this.softReadDir("../../content");
         for (const fileName of fileNames) {
             this.server.logger.log(`[Content] ${logger_1.CONSOLE_FORMATTERS.MAGENTA}Loading ${fileName} content-pack`);
-            const entitiesFolder = this.softReadDir(path_1.default.join("../../../content", fileName, "entities"));
+            const entitiesFolder = this.softReadDir(`../../content/${fileName}/entities`);
             if (entitiesFolder.length !== 0) {
                 this.server.logger.log(`[Content]${logger_1.CONSOLE_FORMATTERS.GREEN} Loaded ${entitiesFolder.length} entities`);
             }
-            this.readEntities(fileName, path_1.default.join("../../../content", fileName, "entities"), entitiesFolder);
+            this.readEntities(fileName, `../../content/${fileName}/entities/`, entitiesFolder);
         }
     }
 }

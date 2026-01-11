@@ -1,0 +1,19 @@
+[9:12:13 PM] [LOG] [Network] WebSocket server is listening on port 443
+[9:12:13 PM] [LOG] [Content] Loading content.js content-pack
+[9:12:13 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content.js\entities
+[9:12:13 PM] [LOG] [Content] Loading content.loader.js content-pack
+[9:12:13 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content.loader.js\entities
+[9:12:13 PM] [LOG] [Content] Loading content.manager.js content-pack
+[9:12:13 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content.manager.js\entities
+[9:12:13 PM] [ERROR] [CommandSystem] Invalid command from path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\command\commands\building\clean-building.js
+[9:12:13 PM] [WARN] [TICKER] TPS: 10.204081632653061 | DELTA: 0.098
+[9:12:20 PM] [WARN] [TICKER] TPS: 16.666666666666668 | DELTA: 0.06
+[9:12:21 PM] [WARN] [TICKER] TPS: 17.543859649122805 | DELTA: 0.057
+[9:12:24 PM] [WARN] [TICKER] TPS: 12.5 | DELTA: 0.08
+[9:12:24 PM] [WARN] [TICKER] TPS: 14.285714285714285 | DELTA: 0.07
+[9:12:24 PM] [WARN] [TICKER] TPS: 14.925373134328357 | DELTA: 0.067
+[9:12:34 PM] [WARN] [TICKER] TPS: 19.23076923076923 | DELTA: 0.052
+[9:12:35 PM] [WARN] [TICKER] TPS: 12.195121951219512 | DELTA: 0.082
+[9:12:35 PM] [WARN] [TICKER] TPS: 14.705882352941176 | DELTA: 0.068
+[9:12:35 PM] [WARN] [TICKER] TPS: 19.23076923076923 | DELTA: 0.052
+[9:12:35 PM] [WARN] [TICKER] TPS: 17.543859649122805 | DELTA: 0.057

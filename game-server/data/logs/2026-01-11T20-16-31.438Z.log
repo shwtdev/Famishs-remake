@@ -1,0 +1,37 @@
+[9:16:31 PM] [LOG] [Network] WebSocket server is listening on port 443
+[9:16:31 PM] [LOG] [Content] Loading base content-pack
+[9:16:31 PM] [LOG] [Content] Loaded 10 entities
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\amethyst
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\diamond
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\gold
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\grid
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\other
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\player.json
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\reidite
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\seed
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\stone
+[9:16:31 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content\base\entities\wood
+[9:16:31 PM] [ERROR] [CommandSystem] Invalid command from path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\command\commands\building\clean-building.js
+[9:16:49 PM] [WARN] [TICKER] TPS: 15.384615384615383 | DELTA: 0.065
+[9:16:50 PM] [WARN] [TICKER] TPS: 18.51851851851852 | DELTA: 0.054
+[9:16:51 PM] [WARN] [TICKER] TPS: 13.698630136986303 | DELTA: 0.073
+[9:16:52 PM] [WARN] [TICKER] TPS: 17.857142857142858 | DELTA: 0.056
+[9:16:55 PM] [WARN] [TICKER] TPS: 15.625 | DELTA: 0.064
+[9:16:55 PM] [WARN] [TICKER] TPS: 11.76470588235294 | DELTA: 0.085
+[9:16:55 PM] [WARN] [TICKER] TPS: 10.1010101010101 | DELTA: 0.099
+[9:16:55 PM] [WARN] [TICKER] TPS: 9.25925925925926 | DELTA: 0.108
+[9:16:56 PM] [WARN] [TICKER] TPS: 7.042253521126761 | DELTA: 0.142
+[9:16:56 PM] [WARN] [TICKER] TPS: 11.235955056179776 | DELTA: 0.089
+[9:16:56 PM] [WARN] [TICKER] TPS: 16.949152542372882 | DELTA: 0.059
+[9:16:57 PM] [WARN] [TICKER] TPS: 18.867924528301888 | DELTA: 0.053
+[9:16:57 PM] [WARN] [TICKER] TPS: 15.625 | DELTA: 0.064
+[9:16:57 PM] [WARN] [TICKER] TPS: 8.474576271186441 | DELTA: 0.118
+[9:16:57 PM] [WARN] [TICKER] TPS: 8.849557522123893 | DELTA: 0.113
+[9:16:57 PM] [WARN] [TICKER] TPS: 10.75268817204301 | DELTA: 0.093
+[9:16:57 PM] [WARN] [TICKER] TPS: 10.204081632653061 | DELTA: 0.098
+[9:16:58 PM] [WARN] [TICKER] TPS: 15.15151515151515 | DELTA: 0.066
+[9:16:58 PM] [WARN] [TICKER] TPS: 18.867924528301888 | DELTA: 0.053
+[9:16:59 PM] [WARN] [TICKER] TPS: 18.51851851851852 | DELTA: 0.054
+[9:16:59 PM] [WARN] [TICKER] TPS: 10.638297872340425 | DELTA: 0.094
+[9:16:59 PM] [WARN] [TICKER] TPS: 13.157894736842106 | DELTA: 0.076
+[9:16:59 PM] [WARN] [TICKER] TPS: 14.925373134328357 | DELTA: 0.067

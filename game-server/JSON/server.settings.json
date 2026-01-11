@@ -1,5 +1,5 @@
 {
-  "production": true,
+  "production": false,
   "domain": "famishs-remake.onrender.com",
   "subdomain": "paris",
   "account_domain": "famishs-remake.onrender.com",

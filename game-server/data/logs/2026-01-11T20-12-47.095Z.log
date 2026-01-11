@@ -1,0 +1,11 @@
+[9:12:47 PM] [LOG] [Network] WebSocket server is listening on port 443
+[9:12:47 PM] [LOG] [Content] Loading content.js content-pack
+[9:12:47 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content.js\entities
+[9:12:47 PM] [LOG] [Content] Loading content.loader.js content-pack
+[9:12:47 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content.loader.js\entities
+[9:12:47 PM] [LOG] [Content] Loading content.manager.js content-pack
+[9:12:47 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\content.manager.js\entities
+[9:12:47 PM] [ERROR] [CommandSystem] Invalid command from path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\command\commands\building\clean-building.js
+[9:12:51 PM] [WARN] [TICKER] TPS: 18.51851851851852 | DELTA: 0.054
+[9:12:52 PM] [WARN] [TICKER] TPS: 19.607843137254903 | DELTA: 0.051
+[9:12:54 PM] [WARN] [TICKER] TPS: 16.39344262295082 | DELTA: 0.061

@@ -1,0 +1,14 @@
+[9:09:45 PM] [LOG] [Network] WebSocket server is listening on port 443
+[9:09:45 PM] [ERROR] [Content] Doesn't exist path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content\C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\content
+[9:09:45 PM] [ERROR] [CommandSystem] Invalid command from path: C:\Users\unkno\Documents\GitHub\Famishs-remake\game-server\compiled\command\commands\building\clean-building.js
+[9:09:48 PM] [WARN] [TICKER] TPS: 13.333333333333334 | DELTA: 0.075
+[9:09:48 PM] [WARN] [TICKER] TPS: 12.345679012345679 | DELTA: 0.081
+[9:10:00 PM] [WARN] [TICKER] TPS: 11.904761904761903 | DELTA: 0.084
+[9:10:00 PM] [WARN] [TICKER] TPS: 19.23076923076923 | DELTA: 0.052
+[9:10:00 PM] [WARN] [TICKER] TPS: 18.51851851851852 | DELTA: 0.054
+[9:10:04 PM] [WARN] [TICKER] TPS: 15.15151515151515 | DELTA: 0.066
+[9:10:04 PM] [WARN] [TICKER] TPS: 18.867924528301888 | DELTA: 0.053
+[9:10:07 PM] [WARN] [TICKER] TPS: 12.658227848101266 | DELTA: 0.079
+[9:10:08 PM] [WARN] [TICKER] TPS: 9.708737864077671 | DELTA: 0.103
+[9:10:08 PM] [WARN] [TICKER] TPS: 17.543859649122805 | DELTA: 0.057
+[9:10:08 PM] [WARN] [TICKER] TPS: 13.88888888888889 | DELTA: 0.072

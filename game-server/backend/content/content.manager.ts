@@ -13,7 +13,7 @@ export class ContentManager {
     }
 
     private softReadDir(dir: string) {
-        const fullDir = path.join(__dirname, dir); // Use __dirname here
+        const fullDir = path.join(__dirname, dir);
         if (!fs.existsSync(fullDir)) {
             this.server.logger.error(`[Content] ${CONSOLE_FORMATTERS.RED}${CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${fullDir}`);
             return [];
@@ -22,7 +22,7 @@ export class ContentManager {
     }
 
     private softReadFile(filePath: string, fileEncoding: BufferEncoding = "utf8") {
-        const fullPath = path.join(__dirname, filePath); // Use __dirname here
+        const fullPath = path.join(__dirname, filePath);
         if (!fs.existsSync(fullPath)) {
             this.server.logger.error(`[Content] ${CONSOLE_FORMATTERS.RED}${CONSOLE_FORMATTERS.BG_RED}Doesn't exist path: ${fullPath}`);
             return null;
@@ -37,6 +37,7 @@ export class ContentManager {
 
             if (parsedPath.ext === ".json") {
                 const config = this.softReadFile(path.join(entitiesPath, unParsedPath), "utf8");
+                
                 if (!config) continue;
 
                 try {
@@ -59,17 +60,17 @@ export class ContentManager {
     }
 
     public loadPackages() {
-        const fileNames = this.softReadDir("../../../content"); // adjust relative to this file
+        const fileNames = this.softReadDir("../../content");
         for (const fileName of fileNames) {
             this.server.logger.log(`[Content] ${CONSOLE_FORMATTERS.MAGENTA}Loading ${fileName} content-pack`);
 
-            const entitiesFolder = this.softReadDir(path.join("../../../content", fileName, "entities"));
+            const entitiesFolder = this.softReadDir(`../../content/${fileName}/entities`);
 
             if (entitiesFolder.length !== 0) {
                 this.server.logger.log(`[Content]${CONSOLE_FORMATTERS.GREEN} Loaded ${entitiesFolder.length} entities`);
             }
 
-            this.readEntities(fileName, path.join("../../../content", fileName, "entities"), entitiesFolder);
+            this.readEntities(fileName, `../../content/${fileName}/entities/`, entitiesFolder);
         }
     }
 }
